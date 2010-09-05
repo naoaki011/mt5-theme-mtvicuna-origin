@@ -1,99 +1,113 @@
 <MTIfCommentsActive>
 <div class="section" id="comments">
-	<h2>Comments:<span class="count"><$MTEntryCommentCount$></span></h2>
+    <h2><$MTEntryCommentCount singular="Comment:<span class="count">1</span>" plural="Comments:<span class="count">#</span>" none="Comment:<span class="count">0</span>"$></h2>
+
 	<MTIgnore>### Comment Logs ###########################################</MTIgnore>
-	<MTIfNonZero tag="MTEntryCommentCount">
-	<dl class="log">
+	<MTIf tag="EntryCommentCount">
+    <dl class="log">
 		<MTComments>
-		<dt<MTIfArchiveTypeEnabled archive_type="Individual"> id="comment-<$MTCommentID$>"</MTIfArchiveTypeEnabled>>
-		<span class="name">
-			<$MTCommentAuthorLink default_name="Anonymous" show_email="0" spam_protect="1"$>
-			<MTIfNonEmpty tag="CommentAuthorIdentity">
-				<MTCommentAuthorIdentity>
-			</MTIfNonEmpty>
-		</span>
-		<span class="date"><$MTCommentDate$></span>
-		</dt>
-		<dd<MTIfCommentParent> class="reply"</MTIfCommentParent>><$MTCommentBody$></dd>
+        <dt<MTIfArchiveTypeEnabled archive_type="Individual"> id="comment-<$MTCommentID$>"</MTIfArchiveTypeEnabled>>
+            <span class="name">
+                <$MTCommentAuthorLink default_name="Anonymous" show_email="0"$>
+			<MTIf tag="CommentAuthorIdentity">
+                <$MTCommentAuthorIdentity$>
+			</MTIf>
+            </span>
+            <span class="date"><$MTCommentDate$></span>
+        </dt>
+        <dd<MTIfCommentParent> class="reply"</MTIfCommentParent>><$MTCommentBody$></dd>
 		</MTComments>
-	</dl>
-	</MTIfNonZero>
+    </dl>
+	</MTIf>
+
 	<MTIgnore>### Comments Form ###########################################</MTIgnore>
 	<MTIfCommentsAccepted>
-		<div class="comments-open" id="comments-open">
-			<div class="comments-open-content">
-				<p id="comment-greeting"></p>
-				<form class="post" method="post" action="<$mt:CGIPath$><$mt:CommentScript$>" id="commentsForm" onsubmit="return mtCommentOnSubmit(this)">
-					<fieldset>
-					<legend>Comment Form</legend>
-					<div>
-						<input type="hidden" name="static" value="1" />
-						<input type="hidden" name="entry_id" value="<$mt:EntryID$>" />
-						<input type="hidden" name="__lang" value="<$mt:BlogLanguage$>" />
-						<input type="hidden" name="parent_id" value="<$mt:CommentParentID$>" id="comment-parent-id" />
-						<input type="hidden" name="armor" value="1" />
-						<input type="hidden" name="preview" value="" />
-						<input type="hidden" name="sid" value="" />
-					</div>
+        <div class="comments-open" id="comments-open">
+            <div class="comments-open-content">
 
+		<MTIgnore>### Ajax Sign in on MT Form ###########################################</MTIgnore>
+            <a href="login" class="signin"><span><__trans phrase="Sign in"></span></a>
+            <fieldset id="signin_menu">
+                <form method="post" action="<$mt:AdminCGIPath$><$mt:CommentScript$>" id="login-form" class="logged-out">
+                    <div class="sign-in">
+                        <p class="error"></p>
+                        <input type="hidden" name="__mode" value="do_ajax_login" />
+                        <input type="hidden" name="blog_id" value="<$mt:BlogID$>" />
+                        <input type="hidden" name="entry_id" value="<$mt:EntryID$>" />
+                        <ul>
+                            <li><label for="username">Username</label><input type="text" id="username" name="username" /></li>
+                            <li><label for="password">Password</label><input type="password" id="password" name="password" /></li>
+                            <li><input type="submit" value="<__trans phrase="Sign in">" id="signin_submit" /></li>
+                        </ul>
+                    </div>
+                </form>
+            </fieldset>
 
-					<div id="comments-open-data">
-						<dl id="commentForm-name">
-							<dt><label for="comment-author">Name</label></dt>
-							<dd><input id="comment-author" name="author" size="30" value="" onfocus="mtCommentFormOnFocus()" /></dd>
-						</dl>
-						<dl id="commentForm-email">
-							<dt><label for="comment-email">Mail Address</label></dt>
-							<dd><input id="comment-email" name="email" size="30" value="" onfocus="mtCommentFormOnFocus()" /></dd>
-						</dl>
-						<dl id="commentForm-url">
-							<dt><label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label></dt>
-							<dd><input id="comment-url" name="url" size="30" value="" onfocus="mtCommentFormOnFocus()" /></dd>
-						</dl>
-						<dl id="commentForm-remember-me">
-							<dt><label for="comment-bake-cookie">Remember personal info?</label> <input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="mtRememberMeOnClick(this)" value="1" accesskey="r" /></dt>
-						</dl>
-					</div>
+                <p id="comment-greeting"></p>
+                <form method="post" action="<$mt:CGIPath$><$mt:CommentScript$>" id="commentsForm" class="post commentsForm">
+                    <fieldset>
+                    <legend>Comment Form</legend>
+                        <div>
+                            <input type="hidden" class="comment-static" name="static" value="1" />
+                            <input type="hidden" class="entry_id" name="entry_id" value="<$mt:EntryID$>" />
+                            <input type="hidden" class="lang" name="__lang" value="<$mt:BlogLanguage$>" />
+                            <input type="hidden" class="parent_id" name="parent_id" value="<$mt:CommentParentID$>" id="comment-parent-id" />
+                            <input type="hidden" class="armor" name="armor" value="1" />
+                            <input type="hidden" class="preview" name="preview" value="" />
+                            <input type="hidden" class="sid" name="sid" value="" />
+                            <input type="hidden" class="ajax" name="ajax" value="0"/>
+                        </div>
 
-					<dl id="commentForm-reply" style="display:none">
-						<dt><label for="comment-reply" id="comment-reply-label"></label></dt>
-						<dd><input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()" /></dd>
-					</dl>
+                        <div id="comments-open-data">
+                            <dl id="commentForm-name">
+                                <dt><label for="comment-author">Name</label></dt>
+                                <dd><input id="comment-author" name="author" size="30" value="" /></dd>
+                            </dl>
+                            <dl id="commentForm-email">
+                                <dt><label for="comment-email">Mail Address</label></dt>
+                                <dd><input id="comment-email" name="email" size="30" value="" /></dd>
+                            </dl>
+                            <dl id="commentForm-url">
+                                <dt><label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label></dt>
+                                <dd><input id="comment-url" name="url" size="30" value="" /></dd>
+                            </dl>
+                            <dl id="commentForm-remember-me">
+                                <dt><label for="comment-bake-cookie">Remember personal info?</label> <input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="mtRememberMeOnClick(this)" value="1" accesskey="r" /></dt>
+                            </dl>
+                        </div>
 
-					<dl id="comments-open-text">
-						<dt>
-							<label for="comment-text">Comment
-							<MTIfAllowCommentHTML>
-								<span>(<__trans phrase="You can use some <abbr title="Hyper Text Markup Language">HTML</abbr> tags for decorating.">)</span>
-								<MTElse>
-								<span>(<__trans phrase="You cannot use <abbr title="Hyper Text Markup Language">HTML</abbr> tags.">)</span>
-								</MTElse>
-							</MTIfAllowCommentHTML>
-							</label>
-						</dt>
-						<dd>
-							<textarea id="comment-text" class="inputField" name="text" rows="8" cols="50" onfocus="mtCommentFormOnFocus()"></textarea>
-						</dd>
-					</dl>
+                        <dl id="commentForm-reply" style="display:none">
+                            <dt><label for="comment-reply" id="comment-reply-label"></label></dt>
+                            <dd><input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()" /></dd>
+                        </dl>
 
-					<p id="comments-open-captcha"></p>
+                        <dl id="comments-open-text">
+                            <dt>
+                                <label for="comment-text">Comment
+		<MTIfAllowCommentHTML>
+                                    <span>(<__trans phrase="You can use some <abbr title="Hyper Text Markup Language">HTML</abbr> tags for decorating.">)</span>
+		<MTElse>
+                                    <span>(<__trans phrase="You cannot use <abbr title="Hyper Text Markup Language">HTML</abbr> tags.">)</span>
+		</MTIfAllowCommentHTML>
+                                </label>
+                            </dt>
+                            <dd>
+                                <textarea id="comment-text" class="inputField" name="text" rows="8" cols="50" onfocus="mtCommentFormOnFocus()"></textarea>
+                            </dd>
+                        </dl>
 
-					<div class="action" id="comments-open-footer">
-						<input type="submit" class="submit preview" accesskey="v" name="preview_button" id="comment-preview" value="Preview" onclick="this.form.preview.value='1';" />
-						<input type="submit" class="submit post" accesskey="s" name="post" id="comment-submit" value="Submit" />
-					</div>
-					</fieldset>
-				</form>
-			</div>
-			<!-- end div#comments-open-content -->
-		</div>
-		<!-- end div#comments-open -->
-		<script type="text/javascript">
-			<!--
-			mtAttachEvent("load", mtEntryOnLoad);
-			mtAttachEvent("unload", mtEntryOnUnload);
-			//-->
-		</script>
+                        <p id="comments-open-captcha"></p>
+
+                        <div class="action" id="comments-open-footer">
+                            <input type="submit" class="submit preview" accesskey="v" name="preview_button" id="comment-preview" value="Preview" onclick="this.form.preview.value='1';" />
+                            <input type="submit" class="submit post" accesskey="s" name="post" id="comment-submit" value="Submit" />
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!-- end div#comments-open-content -->
+        </div>
+        <!-- end div#comments-open -->
 	</MTIfCommentsAccepted>
 </div>
 <!-- end div#comments -->

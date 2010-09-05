@@ -1,15 +1,15 @@
 <mt:IfArchiveTypeEnabled archive_type="Monthly">
-    <mt:ArchiveList archive_type="Monthly">
-        <mt:ArchiveListHeader>
-<dt>Archives</dt>
-<dd class="monthlyArchives">
-	<div style="margin: 0.3em 10px;">
-      <select onchange="nav(this)">
-         <option><__trans phrase="Select a Month..."></option>
-         </mt:ArchiveListHeader>
-         <option value="<$mt:ArchiveLink$>"><$mt:ArchiveTitle$></option>
-         <mt:ArchiveListFooter>
-      </select>
+	<mt:ArchiveList archive_type="Monthly">
+		<mt:ArchiveListHeader>
+                <dt>Archives</dt>
+                <dd class="monthlyArchives">
+                    <div style="margin: 0.3em 10px;">
+                        <select onchange="nav(this)">
+                            <option><__trans phrase="Select a Month..."></option>
+		</mt:ArchiveListHeader>
+                            <option value="<$mt:ArchiveLink$>"><$mt:ArchiveTitle$></option>
+		<mt:ArchiveListFooter>
+                        </select>
 <script type="text/javascript" charset="utf-8">
 /* <![CDATA[ */
 function nav(sel) {
@@ -20,8 +20,9 @@ function nav(sel) {
 }
 /* ]]> */
 </script>
-	</div>
-</dd>
-        </mt:ArchiveListFooter>
-    </mt:ArchiveList>
+                    </div>
+                </dd>
+		</mt:ArchiveListFooter>
+	</mt:ArchiveList>
 </mt:IfArchiveTypeEnabled>
+                

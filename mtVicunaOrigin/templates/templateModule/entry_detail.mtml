@@ -1,16 +1,15 @@
-<div class="entry">
-	<$MTInclude module="<__trans phrase="Entry Metadata">"$>
-	<div class="textBody">
-		<$MTEntryBody$>
-	</div>
-	<MTIfNonEmpty tag="EntryMore">
-	<div class="textBody" id="extended">
-		<$MTEntryMore$>
-	</div>
-	</MTIfNonEmpty>
-	<$MTInclude module="<__trans phrase="Related Entries">"$>
-	<$MTInclude module="<__trans phrase="Next Entry Link Detailed">"$>
-	<$MTInclude module="<__trans phrase="Comments">"$>
-	<$MTInclude module="<__trans phrase="TrackBacks">"$>
-</div>
-<!-- end div.entry -->
+            <div class="entry">
+                <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Entry Metadata"></__trans_section>"$>
+                <div class="textBody">
+                    <$MTEntryBody$>
+                </div>
+<MTIf tag="EntryMore" strip_linefeeds="1" trim="1">
+                <div class="textBody" id="extended">
+                    <$MTEntryMore$>
+                </div>
+</MTIf>
+                <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Related Entries"></__trans_section>"$>
+                <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Next Entry Link Detailed"></__trans_section>"$>
+                <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Comments"></__trans_section>"$>
+                <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="TrackBacks"></__trans_section>"$>
+            </div><!-- end div.entry -->

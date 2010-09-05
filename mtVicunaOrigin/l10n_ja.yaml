@@ -1,5 +1,9 @@
 Vicuna Credit: <a href="http://mt.vicuna.jp/" title="ver.2.3">Movable Type Template</a>
+mt.Vicuna Origin Theme: mt.Vicuna Origin テーマ
+Plugin for a MT5 Origin Theme for Vicuna CMS.: <a href="http://vicuna.jp/">VICUNA CMS</a>のMT5用Originテーマ・プラグイン
 A MT5 Theme for Vicuna CMS.: VICUNA CMSのMT5用テーマ
+A MT5 Website Theme for Vicuna CMS.: VICUNA CMSのMT5ウェブサイト用テーマ。MT4用Vicunaテンプレートセットと構造互換を持ったテーマです。
+A MT5 Blog Theme for Vicuna CMS.: VICUNA CMSのMT5ブログ用テーマ。MT4用Vicunaテンプレートセットと構造互換を持ったテーマです。
 Entry: ブログ記事(個別エントリー)
 Entry Listing Category: ブログ記事リスト(カテゴリー)
 Entry Listing Datebased: ブログ記事リスト(月別)
@@ -24,23 +28,16 @@ Category Archive List: カテゴリーリスト
 Links: リンク集
 Monthly Archive List: 月別リスト
 Recent Assets: アイテム画像サムネイル
+Recent Entries(Photo): 最近のエントリー（写真）
 Recent Comments: 最近届いたコメント
 Recent Trackbacks: 最近届いたトラックバック
+Blogs: ブログ
 Topic Path: パンくずリスト
 Feed: フィード購読リンク
-Conditional Widget - Main Index(Home): 条件付 Widget - トップページのみ出現
-Conditional Widget - Category: 条件付 Widget - カテゴリページのみ出現
-Conditional Widget - Web Page: 条件付 Widget - ウェブページのみ出現
-Conditional Widget - Individual: 条件付 Widget - 個別エントリーのみ出現
-Conditional Widget - Datebased: 条件付 Widget - 時系列ページのみ出現
 Monthly Archive Dropdown: 月別ドロップダウン
 Navigation Utilities: サイドバー(ナビゲーション)
 Other Utilities: サイドバー(その他)
 Related Entries: 関連エントリー
-This is a custom set of widgets that are conditioned to only appear on the Individual entry page.: 個別エントリーページだけに表示されるように設定されているウィジェットです。
-This is a custom set of widgets that are conditioned to only appear on the Category archive.: カテゴリーアーカイブページだけに表示されるように設定されているウィジェットです。
-This is a custom set of widgets that are conditioned to only appear on the Web page.: ウェブページだけに表示されるように設定されているウィジェットです。
-This is a custom set of widgets that are conditioned to only appear on the Datebased archive page.: 時系列アーカイブページだけに表示されるように設定されているウィジェットです。
 You can use some <abbr title="Hyper Text Markup Language">HTML</abbr> tags for decorating.: スタイル指定用の一部の <abbr title="Hyper Text Markup Language">HTML</abbr>タグが使用できます。
 You cannot use <abbr title="Hyper Text Markup Language">HTML</abbr> tags.: <abbr title="Hyper Text Markup Language">HTML</abbr>タグは使用できません。
 Extended: 続きを読む
@@ -48,6 +45,7 @@ Comments on <$MTEntryTitle encode_html="1"$>: <$MTEntryTitle encode_html="1"$> �
 Trackbacks to <$MTEntryTitle encode_html="1"$>: <$MTEntryTitle encode_html="1"$> へのトラックバック
 a newer entry: 1つ新しい記事
 an older entry: 1つ古い記事
+<strong>OpenID</strong> accepted here: <strong>OpenID</strong>に対応しています
 You did not enter anything to search for. Please try again: 検索キーワードが入力されていません。
 Your search - <em><$MTSearchString$></em> -- did not match any documents.: <em><$MTSearchString$></em> というキーワードを含む記事は見つかりませんでした。
 Make sure all words are spelled correctly.: キーワードに誤字や脱字がありませんか ?
@@ -59,3 +57,9 @@ Regex Search: 正規表現を使用する
 Body text: 本文内検索
 Comments: コメント
 Both: 両方
+_PWT_ABOUT_BODY: |
+  <p><strong>以下の文章はサンプルです。内容を適切に書き換えてください。</strong></p>
+  <p>いろはにほへと ちりぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす</p>
+  <p>色は匂へど 散りぬるを 我が世誰ぞ 常ならむ 有為の奥山 今日越えて 浅き夢見じ 酔ひもせず</p>
+Tagged with @globalNavi WebPages add the Global navigation Automatically.: |
+  @globalNavi タグの付いたウェブページを自動的に項目に追加します。

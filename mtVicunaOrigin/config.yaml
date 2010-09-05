@@ -1,0 +1,542 @@
+name: mt.Vicuna Origin Theme Set
+id: mtVicunaOrigin
+description: <__trans phrase="Plugin for a MT5 Origin Theme for Vicuna CMS.">
+author_name: <__trans phrase="oscar">
+author_link: http://www.zelazny.mydns.jp/
+plugin_link: http://code.zelazny.mydns.jp/trac/theme/wiki/mtVicuna/Origin
+doc_link: http://mt.vicuna.jp/
+l10n_lexicon:
+  ja: l10n_ja.yaml
+version: 1.0.1
+template_sets:
+  mtVicunaOriginBlog:
+    base_path: templates
+    label: mt.Vicuna Origin Theme
+    custom_header:
+      max_width: 780
+      max_height: 125
+themes:
+  mtVicunaOriginWeb:
+    id: mtVicunaOriginWeb
+    label: mt.Vicuna Origin Theme
+    description: <__trans phrase="A MT5 Website Theme for Vicuna CMS.">
+    author_name: wu
+    author_link: http://3ping.org/
+    version: 2.4.0
+    class: website
+    static_path: blog_static
+    l10n_lexicon:
+      ja: l10n_ja.yaml
+    thumbnail_file: vicuna.png
+    thumbnail_file_medium: vicuna-medium.png
+    thumbnail_file_small: vicuna-small.png
+    elements:
+      blog_static_files: 
+        component: core
+        importer: blog_static_files
+        require: 1
+        data: 
+          - themes
+      default_prefs:
+        component: core
+        importer: default_prefs
+        data:
+          archive_type_preferred: Individual
+          file_extension: html
+          convert_paras: __default__
+          convert_paras_comments: __default__
+          sort_order_comments: ascend
+          sort_order_posts: descend
+          words_in_excerpt: 40
+      default_pages:
+        component: core
+        importer: default_pages
+        name: Default Pages
+        data:
+          #
+          # See http://bugs.movabletype.org/default.asp?103715
+          # about:
+          #   basename: index
+          index:
+            title: About
+            text: <__trans phrase="_PWT_ABOUT_BODY">
+            tags: @about,@globalNavi
+            folder: about
+      template_set:
+        component: core
+        importer: template_set
+        name: Template Set
+        data:
+          label: mt.Vicuna Origin
+          base_path: templates
+          templates:
+            index:
+              main_index:
+                label: Main Index
+                filename: main_index.mtml
+                outfile: index.html
+                rebuild_me: 1
+              styles:
+                label: Stylesheet
+                outfile: styles.css
+                rebuild_me: 1
+              feed_recent:
+                label: Feed - Recent Entries
+                outfile: atom.xml
+                rebuild_me: 1
+              rsd:
+                label: RSD
+                outfile: rsd.xml
+                rebuild_me: 1
+              javascript:
+                label: JavaScript
+                outfile: js/mt.js
+                rebuild_me: 1
+              user_jquery:
+                label: User JQuery
+                outfile: js/user_jquery.js
+                rebuild_me: 1
+              rss: 
+                label: RSS
+                outfile: rss.xml
+                rebuild_me: 1
+            page:
+              page:
+                label: Page
+                filename: archiveTemplate/page.mtml
+                mappings:
+                  page_archive:
+                    archive_type: Page
+                    file_template: %-c/%-f
+            module:
+              header:
+                label: Header
+                filename: templateModule/header.mtml
+              footer:
+                label: Footer
+                filename: templateModule/footer.mtml
+              html_header:
+                label: HTML Header
+                filename: templateModule/html_header.mtml
+              topic_path:
+                label: Topic Path
+                filename: templateModule/topic_path.mtml
+              utilities:
+                label: Utilities
+                filename: templateModule/utilities.mtml
+              archive_index_link:
+                label: Archive Index Link
+                filename: templateModule/archive_index_link.mtml
+              entry_summary:
+                label: Entry Summary
+                filename: templateModule/entry_summary.mtml
+              entry_summary_feedbacks:
+                label: Entry Summary Feedbacks
+                filename: templateModule/entry_summary_feedbacks.mtml
+              entry_metadata:
+                label: Entry Metadata
+                filename: templateModule/entry_metadata.mtml
+              comments:
+                label: Comments
+                filename: templateModule/comments.mtml
+              comment_detail:
+                label: Comment Detail
+                filename: templateModule/comment_detail.mtml
+              trackbacks:
+                label: TrackBacks
+                filename: templateModule/trackbacks.mtml
+              headline:
+                label: Headline
+                filename: templateModule/headline.mtml
+              global_navigation:
+                label: Global Navigation
+                filename: templateModule/global_navigation.mtml
+              return:
+                label: Return to page top
+                filename: templateModule/return.mtml
+            system:
+              comment_preview:
+                label: Comment Preview
+                filename: system/comment_preview.mtml
+              comment_response:
+                label: Comment Response
+                filename: system/comment_response.mtml
+              comment_listing:
+                label: Comment Listing
+                filename: system/comment_listing.mtml
+              dynamic_error:
+                label: Dynamic Error
+                filename: system/dynamic_error.mtml
+              popup_image:
+                label: Popup Image
+                filename: system/popup_image.mtml
+              search_results:
+                label: Search Results
+                filename: system/search_results.mtml
+            widgetset:
+              Navigation Utilities:
+                order: 1000
+                label: Navigation Utilities
+                widgets:
+                  - About
+                  - Blogs
+                  - Recent Entries(Photo)
+                  - Pages
+                  - Tag Cloud
+                  #
+                  # See http://bugs.movabletype.org/default.asp?104027
+                  # L10N Translate not same as Core L10N dictionary won't Regist.
+                  # Recent Comments Recent Trackbacks Feed
+                  #
+              Other Utilities:
+                order: 1000
+                label: Other Utilities
+                widgets:
+                  - Search
+                  - Recent Comments
+                  - Recent Trackbacks
+                  - OpenID
+                  - Creative Commons
+                  - Feed
+            widget:
+              u_about:
+                label: About
+                filename: widget/u_about.mtml
+              u_blogs:
+                label: Blogs
+                filename: widget/u_blogs.mtml
+              u_calendar:
+                label: Calender
+                filename: widget/u_calendar.mtml
+              u_recent_comments:
+                label: Recent Comments
+                filename: widget/u_recent_comments.mtml
+              u_recent_trackbacks:
+                label: Recent Trackbacks
+                filename: widget/u_recent_trackbacks.mtml
+              u_recent_entries:
+                label: Recent Entries
+                filename: widget/u_recent_entries.mtml
+              u_recent_entry_assets:
+                label: Recent Entries(Photo)
+                filename: widget/u_recent_entry_assets.mtml
+              u_pages:
+                label: Pages
+                filename: widget/u_pages.mtml
+              u_recent_assets:
+                label: Recent Assets
+                filename: widget/u_recent_assets.mtml
+              u_feed:
+                label: Feed
+                filename: widget/u_feed.mtml
+              u_links:
+                label: Links
+                filename: widget/u_links.mtml
+              u_search:
+                label: Search
+                filename: widget/u_search.mtml
+              u_tag_cloud:
+                label: Tag Cloud
+                filename: widget/u_tag_cloud.mtml
+              u_creative_commons:
+                label: Creative Commons
+                filename: widget/u_creative_commons.mtml
+              u_openid:
+                label: OpenID
+                filename: widget/u_openid.mtml
+              u_signin:
+                label: Sign in
+                filename: widget/u_signin.mtml
+  mtVicunaOriginBlog:
+    id: mtVicunaOriginBlog
+    label: mt.Vicuna Origin Theme
+    description: <__trans phrase="A MT5 Blog Theme for Vicuna CMS.">
+    author_name: wu
+    author_link: http://3ping.org/
+    version: 2.4.0
+    class: blog
+    static_path: blog_static
+    l10n_lexicon:
+      ja: l10n_ja.yaml
+    thumbnail_file: vicuna.png
+    thumbnail_file_medium: vicuna-medium.png
+    thumbnail_file_small: vicuna-small.png
+    elements:
+      blog_static_files: 
+        component: core
+        importer: blog_static_files
+        require: 1
+        data: 
+          - themes
+      default_prefs:
+        component: core
+        importer: default_prefs
+        data:
+          file_extension: html
+          convert_paras: __default__
+          convert_paras_comments: __default__
+          archive_type_preferred: Individual
+          entries_on_index: 5
+      template_set:
+        component: core
+        importer: template_set
+        name: Template Set
+        data:
+          label: mt.Vicuna Origin
+          base_path: templates
+          templates:
+            index:
+              main_index:
+                label: Main Index
+                outfile: index.html
+                rebuild_me: 1
+              styles:
+                label: Stylesheet
+                outfile: styles.css
+                rebuild_me: 1
+              feed_recent:
+                label: Feed - Recent Entries
+                outfile: atom.xml
+                rebuild_me: 1
+              rsd:
+                label: RSD
+                outfile: rsd.xml
+                rebuild_me: 1
+              javascript:
+                label: JavaScript
+                outfile: js/mt.js
+                rebuild_me: 1
+              mt_jquery: 
+                label: mt.jquery
+                outfile: js/mt.jquery.js
+                rebuild_me: 1
+              user_jquery:
+                label: User JQuery
+                outfile: js/user_jquery.js
+                rebuild_me: 1
+              archive_index:
+                label: Archive Index
+                outfile: archives/index.html
+              rss: 
+                label: RSS
+                outfile: rss.xml
+                rebuild_me: 1
+            individual:
+              entry:
+                label: Entry
+                filename: archiveTemplate/entry.mtml
+                mappings:
+                  entry_archive:
+                    archive_type: Individual
+                    file_template: %y/%m/%-f
+            archive:
+              entry_listing_category:
+                label: Entry Listing Category
+                filename: archiveTemplate/entry_listing_category.mtml
+                mappings:
+                  category:
+                    archive_type: Category
+                    file_template: %-c/%i
+              entry_listing_datebased:
+                label: Entry Listing Datebased
+                filename: archiveTemplate/entry_listing_datebased.mtml
+                mappings:
+                  monthly:
+                    archive_type: Monthly
+                    file_template: %y/%m/%i
+            page:
+              page:
+                label: Page
+                filename: archiveTemplate/page.mtml
+                mappings:
+                  page_archive:
+                   archive_type: Page
+                   file_template: %-c/%-f
+            module:
+              header:
+                label: Header
+                filename: templateModule/header.mtml
+              footer:
+                label: Footer
+                filename: templateModule/footer.mtml
+              html_header:
+                label: HTML Header
+                filename: templateModule/html_header.mtml
+              topic_path:
+                label: Topic Path
+                filename: templateModule/topic_path.mtml
+              utilities:
+                label: Utilities
+                filename: templateModule/utilities.mtml
+              archive_index_link:
+                label: Archive Index Link
+                filename: templateModule/archive_index_link.mtml
+              entry_detail:
+                label: Entry Detail
+                filename: templateModule/entry_detail.mtml
+              entry_summary:
+                label: Entry Summary
+                filename: templateModule/entry_summary.mtml
+              entry_summary_feedbacks:
+                label: Entry Summary Feedbacks
+                filename: templateModule/entry_summary_feedbacks.mtml
+              entry_metadata:
+                label: Entry Metadata
+                filename: templateModule/entry_metadata.mtml
+              related_entries:
+                label: Related Entries
+                filename: templateModule/related_entries.mtml
+              comments:
+                label: Comments
+                filename: templateModule/comments.mtml
+              comment_detail:
+                label: Comment Detail
+                filename: templateModule/comment_detail.mtml
+              trackbacks:
+                label: TrackBacks
+                filename: templateModule/trackbacks.mtml
+              next_entry_link_simple:
+                label: Next Entry Link Simple
+                filename: templateModule/next_entry_link_simple.mtml
+              next_entry_link_detailed:
+                label: Next Entry Link Detailed
+                filename: templateModule/next_entry_link_detailed.mtml
+              headline:
+                label: Headline
+                filename: templateModule/headline.mtml
+              global_navigation:
+                label: Global Navigation
+                filename: templateModule/global_navigation.mtml
+              return:
+                label: Return to page top
+                filename: templateModule/return.mtml
+              form_field: 
+                label: フォームフィールド
+                filename: templateModule/form_field.mtml
+              messaging: 
+                label: メッセージング
+                filename: templateModule/messaging.mtml
+              user_profile: 
+                label: ユーザープロフィール
+                filename: templateModule/user_profile.mtml
+              userpic: 
+                label: プロフィール画像
+                filename: templateModule/userpic.mtml
+            system:
+              comment_listing:
+                label: Comment Listing
+                filename: system/comment_listing.mtml
+              comment_preview:
+                label: Comment Preview
+                filename: system/comment_preview.mtml
+              comment_response:
+                label: Comment Response
+                filename: system/comment_response.mtml
+              dynamic_error:
+                label: Dynamic Error
+                filename: system/dynamic_error.mtml
+              login_form: 
+                label: ログインフォーム
+                filename: system/login_form.mtml
+              new_password: 
+                label: 新しいパスワードの設定フォーム
+                filename: system/new_password.mtml
+              new_password_reset_form: 
+                label: 新しいパスワード再設定フォーム
+                filename: system/new_password_reset_form.mtml
+              popup_image:
+                label: Popup Image
+                filename: system/popup_image.mtml
+              profile_edit_form: 
+                label: プロフィールの編集フォーム
+                filename: system/profile_edit_form.mtml
+              profile_feed: 
+                label: プロフィールフィード
+                filename: system/profile_feed.mtml
+              profile_view: 
+                label: プロフィール
+                filename: system/comment_response.mtml
+              register_confirmation: 
+                label: 登録確認
+                filename: system/register_confirmation.mtml
+              register_form: 
+                label: 登録する
+                filename: system/register_form.mtml
+              search_results:
+                label: Search Results
+                filename: system/search_results.mtml
+            widgetset:
+              navigation_utilities:
+                order: 1000
+                label: Navigation Utilities
+                widgets:
+                  - Recent Entries
+                  - Category Archive List
+                  - Monthly Archive List
+                  - Tag Cloud
+              other_utilities:
+                order: 1000
+                label: Other Utilities
+                widgets:
+                  - Search
+                  - Recent Comments
+                  - Recent Trackbacks
+                  - OpenID
+                  - Creative Commons
+                  - Feed
+            widget:
+              u_about:
+                label: About
+                filename: widget/u_about.mtml
+              u_blogs:
+                label: Blogs
+                filename: widget/u_blogs.mtml
+              u_monthly_archives_list:
+                label: Monthly Archive List
+                filename: widget/u_monthly_archives_list.mtml
+              u_monthly_archives_dropdown:
+                label: Monthly Archive Dropdown
+                filename: widget/u_monthly_archives_dropdown.mtml
+              u_category_archive_list:
+                label: Category Archive List
+                filename: widget/u_category_archive_list.mtml
+              u_calendar:
+                label: Calender
+                filename: widget/u_calendar.mtml
+              u_recent_comments:
+                label: Recent Comments
+                filename: widget/u_recent_comments.mtml
+              u_recent_trackbacks:
+                label: Recent Trackbacks
+                filename: widget/u_recent_trackbacks.mtml
+              u_recent_entries:
+                label: Recent Entries
+                filename: widget/u_recent_entries.mtml
+              u_recent_entry_assets:
+                label: Recent Entries(Photo)
+                filename: widget/u_recent_entry_assets.mtml
+              u_recent_assets:
+                label: Recent Assets
+                filename: widget/u_recent_assets.mtml
+              u_feed:
+                label: Feed
+                filename: widget/u_feed.mtml
+              u_links:
+                label: Links
+                filename: widget/u_links.mtml
+              u_search:
+                label: Search
+                filename: widget/u_search.mtml
+              u_tag_cloud:
+                label: Tag Cloud
+                filename: widget/u_tag_cloud.mtml
+              u_creative_commons:
+                label: Creative Commons
+                filename: widget/u_creative_commons.mtml
+              u_openid:
+                label: OpenID
+                filename: widget/u_openid.mtml
+              u_signin:
+                label: Sign in
+                filename: widget/u_signin.mtml
+

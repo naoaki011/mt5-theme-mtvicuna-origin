@@ -1,35 +1,43 @@
-<MTSetVar name="system_template" value="1">
-<MTSetVarBlock name="page_title">Page Not Found</MTSetVarBlock>
+<MTSetVars>
+    system_template=1
+    page_title=Page Not Found
+<MTIfWebsite>
+    website_id=<$MTWebsiteID$>
+<MTElse>
+    website_id=<MTBlogParentWebsite><$MTWebsiteID$></MTBlogParentWebsite>
+</MTIfWebsite>
+    blog_id=<$MTBlogID$>
+</MTSetVars>
 <?xml version="1.0" encoding="<$MTPublishCharset$>" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<$MTDefaultLanguage$>" xml:lang="<$MTDefaultLanguage$>">
 <head profile="http://purl.org/net/ns/metaprof">
-	<MTInclude module="<__trans phrase="HTML Header">">
-	<title><$MTGetVar name="page_title"$></title>
+    <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="HTML Header"></__trans_section>"$>
+    <title><$MTGetVar name="page_title"$></title>
 </head>
 <body class="individual system error single">
-	<$MTInclude module="<__trans phrase="Header">"$>
-	<div id="content">
-		<div id="main">
-			<p class="topicPath"><a href="<$MTBlogURL$>" rel="nofollow">Home</a> &gt; <span class="current">Error</span></p>
-			<h1><$MTGetVar name="page_title"$></h1>
-			<div class="entry">
-				<ul class="info">
-					<li>Error</li>
-				</ul>
-	                        <div class="textBody">
-					<p>Page is Not Found</p>
-					<p><strong><$MTErrorMessage$></strong></p>
-					<p><a href="<$MTBlogURL$>" rel="nofollow">Return to index</a></p>
-				</div>
-			</div>
-			<p class="topicPath"><a href="<$MTBlogURL$>" rel="nofollow">Home</a> &gt; <span class="current">Error</span></p>
-		</div>
-		<!-- end div#main -->
-		<$MTInclude module="<__trans phrase="Utilities">"$>
-		<$MTInclude module="<__trans phrase="Return to page top">"$>
-	</div>
-	<!-- end div#content -->
-	<$MTInclude module="<__trans phrase="Footer">"$>
+    <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Header"></__trans_section>"$>
+    <div id="content">
+        <div id="main">
+            <p class="topicPath"><a href="<$MTBlogURL$>" rel="nofollow">Home</a> &gt; <span class="current">Error</span></p>
+            <h1><$MTGetVar name="page_title"$></h1>
+            <div class="entry">
+                <ul class="info">
+                    <li>Error</li>
+                </ul>
+                <div class="textBody">
+                    <p>Page is Not Found</p>
+                    <p><strong><$MTErrorMessage$></strong></p>
+                    <p><a href="<$MTBlogURL$>" rel="nofollow">Return to index</a></p>
+                </div>
+            </div>
+            <p class="topicPath"><a href="<$MTBlogURL$>" rel="nofollow">Home</a> &gt; <span class="current">Error</span></p>
+        </div>
+        <!-- end div#main -->
+        <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Utilities"></__trans_section>"$>
+        <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Return to page top"></__trans_section>"$>
+    </div>
+    <!-- end div#content -->
+    <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Footer"></__trans_section>"$>
 </body>
 </html>

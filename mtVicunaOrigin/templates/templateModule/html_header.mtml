@@ -1,18 +1,25 @@
-<meta http-equiv="Content-Type" content="text/html; charset=<$MTPublishCharset$>" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="generator" content="<$MTProductName version="1"$>" />
-<meta name="author" content="<$MTBlogName encode_html="1"$>" />
-<link rel="stylesheet" href="<$MTLink template="<__trans phrase="Stylesheet">"$>" type="text/css" />
-<link rel="alternate" type="application/rss+xml" title="RSS" href="<$MTLink template="RSS"$>" />
-<link rel="alternate" type="application/atom+xml" title="Atom" href="<$MTLink template="Atom"$>" />
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="<$MTLink template="RSD"$>" />
-<link rel="start" href="<$MTBlogURL$>" title="Home" />
-<link rel="contents" href="<$MTLink template="<__trans phrase="Archive Index">"$>" title="<$MTBlogName encode_html="1"$> Archives" />
-<script type="text/javascript" src="<$MTLink template="javascript"$>"></script>
-<MTIf name="jquery">
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript">google.load("jquery", "1.2");</script>
-	<script type="text/javascript" src="<$MTLink template="user_jquery"$>"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=<$MTPublishCharset$>" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="<$MTProductName version="1"$>" />
+    <meta name="author" content="<$MTBlogName escape="html"$>" />
+    <link rel="stylesheet" href="<$MTLink template="styles"$>" type="text/css" />
+<MTIf tag="Link" template="rss">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="<$MTLink template="rss"$>" />
 </MTIf>
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="<$MTLink template="feed_recent"$>" />
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="<$MTLink template="rsd"$>" />
+    <link rel="start" href="<$MTBlogURL$>" title="Home" />
+<MTIf tag="Link" template="archive_index">
+    <link rel="contents" href="<$MTLink template="<__trans phrase="archive_index">"$>" title="<$MTBlogName escape="html"$> Archives" />
+</MTIf>
+    <script type="text/javascript" src="<$MTLink template="javascript"$>"></script>
+<MTIf tag="BlogHost" like="/^localhost$/">
+    <script type="text/javascript" src="<$MTStaticWebPath$>jquery/jquery.js"></script>
+<MTElse>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("jquery", "1.4");</script>
+</MTIf>
+    <script type="text/javascript" src="<$MTStaticWebPath$>jquery/jquery.form.js"></script>
+    <script type="text/javascript" src="<$MTLink template="user_jquery"$>"></script>
 <$MTCCLicenseRDF$>

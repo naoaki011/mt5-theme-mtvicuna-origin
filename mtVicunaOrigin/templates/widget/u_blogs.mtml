@@ -1,0 +1,17 @@
+                <dt>Blogs</dt>
+                <dd class="blogs">
+                    <ul class="blog">
+<MTIfWebsite>
+	<MTSetVar name="include_modifier" value="children" />
+<MTElse>
+	<MTSetVar name="include_modifier" value="siblings" />
+</MTIfWebsite>
+<MTBlogs include_blogs="$include_modifier">
+	<MTIf tag=BlogID eq="$blog_id">
+                        <li><$mt:BlogName escape="html"$></li>
+	<MTElse>
+                        <li><a href="<$mt:BlogURL$>" title="<$mt:BlogName escape="html"$>"><$mt:BlogName escape="html"$></a><MTIf tag="BlogDescription">:<$MTBlogDescription encode_html="1"$></MTIf></li>
+	</MTIf>
+</MTBlogs>
+                    </ul>
+                </dd>

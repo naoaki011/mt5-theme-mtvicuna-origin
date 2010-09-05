@@ -1,108 +1,119 @@
-<MTSetVar name="tempName" value="system_comment_preview">
-<MTSetVarBlock name="page_title">Confirmation</MTSetVarBlock>
+<MTSetVars>
+    tempName=system_comment_preview">
+    page_title=<__trans_section component="mtVicunaOrigin"><__trans phrase="Confirmation"></__trans_section>
+<MTIfWebsite>
+    website_id=<$MTWebsiteID$>
+<MTElse>
+    website_id=<MTBlogParentWebsite><$MTWebsiteID$></MTBlogParentWebsite>
+</MTIfWebsite>
+    blog_id=<$MTBlogID$>
+</MTSetVars>
 <?xml version="1.0" encoding="<$MTPublishCharset$>" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<$MTDefaultLanguage$>" xml:lang="<$MTDefaultLanguage$>">
 <head profile="http://purl.org/net/ns/metaprof">
-	<script type="text/javascript">
-	/* <![CDATA[ */
-	var user = <$mt:UserSessionState$>;
-	var is_preview = true;
-	/* ]]> */
-	</script>
-	<MTInclude module="<__trans phrase="HTML Header">">
-	<MTIfNonEmpty tag="MTBlogDescription"><meta name="description" content="<$MTBlogDescription encode_html="1"$>" /></MTIfNonEmpty>
-   	<MTIfCommentsAccepted><script type="text/javascript" src="<$MTLink template="javascript"$>"></script></MTIfCommentsAccepted>
-	<title><$MTGetVar name="page_title"$></title>
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var user = <$mt:UserSessionState$>;
+    var is_preview = true;
+    /* ]]> */
+    </script>
+    <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="HTML Header"></__trans_section>"$>
+<MTIf tag="BlogDescription">
+    <meta name="description" content="<$MTBlogDescription escape="html"$>" />
+</MTIf>
+<MTIfCommentsAccepted>
+    <script type="text/javascript" src="<$MTLink template="javascript"$>"></script>
+</MTIfCommentsAccepted>
+    <title><$MTGetVar name="page_title"$></title>
 </head>
-<body class="individual system single" onload="mtEntryOnLoad()" onload="mtEntryOnLoad()" onunload="mtEntryOnUnload()">
-	<$MTInclude module="<__trans phrase="Header">"$>
-	<div id="content">
-		<div id="main">
-			<$MTInclude module="<__trans phrase="Topic Path">"$>
-			<h1><$MTGetVar name="page_title"$></h1>
-			<div class="entry">
-				<ul class="info">
-					<li class="author">Name: <$MTCommentPreviewAuthorLink spam_protect="1"$></li>
-					<li class="date"><$MTCommentPreviewDate$></li>
-				</ul>
-				<div class="textBody">
-					<$MTCommentPreviewBody$>
-				</div>
-			</div>
+<body class="individual system single" onload="mtEntryOnLoad()" onunload="mtEntryOnUnload()">
+    <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Header"></__trans_section>"$>
+    <div id="content">
+        <div id="main">
+            <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Topic Path"></__trans_section>"$>
+            <h1><$MTGetVar name="page_title"$></h1>
+            <div class="entry">
+                <ul class="info">
+                    <li class="author">Name: <$MTCommentPreviewAuthorLink spam_protect="1"$></li>
+                    <li class="date"><$MTCommentPreviewDate$></li>
+                </ul>
+                <div class="textBody">
+                    <$MTCommentPreviewBody$>
+                </div>
+            </div>
 
 			<MTIgnore>### Comments Form ###########################################</MTIgnore>
-			<div class="comments-open" id="comments-open">
-				<div class="comments-open-content">
-					<p id="comment-greeting"></p>
-					<form class="post" method="post" action="<$mt:CGIPath$><$mt:CommentScript$>" id="commentsForm" onsubmit="return mtCommentOnSubmit(this)">
-						<fieldset>
-						<legend>Comment Form</legend>
-						<div>
-							<input type="hidden" name="static" value="1" />
-							<input type="hidden" name="entry_id" value="<$mt:EntryID$>" />
-							<input type="hidden" name="__lang" value="<$mt:BlogLanguage$>" />
-							<input type="hidden" name="armor" value="1" />
-							<input type="hidden" name="preview" value="" />
+            <div class="comments-open" id="comments-open">
+                <div class="comments-open-content">
+                    <p id="comment-greeting"></p>
+                    <form class="post" method="post" action="<$mt:CGIPath$><$mt:CommentScript$>" id="commentsForm" onsubmit="return mtCommentOnSubmit(this)">
+                        <fieldset>
+                        <legend>Comment Form</legend>
+                        <div>
+                            <input type="hidden" name="static" value="1" />
+                            <input type="hidden" name="entry_id" value="<$mt:EntryID$>" />
+                            <input type="hidden" name="__lang" value="<$mt:BlogLanguage$>" />
+                            <input type="hidden" name="armor" value="1" />
+                            <input type="hidden" name="preview" value="" />
 <MTIfCommentParent>
-							<input type="hidden" name="parent_id" value="<$mt:CommentParentID$>" id="comment-parent-id">
+                            <input type="hidden" name="parent_id" value="<$mt:CommentParentID$>" id="comment-parent-id">
 </MTIfCommentParent>
-						</div>
+                        </div>
 
-
-						<div id="comments-open-data">
-							<dl id="commentForm-name">
-								<dt><label for="comment-author">Name</label></dt>
-								<dd><input id="comment-author" name="author" size="30" value="<$mt:CommentAuthor encode_html="1"$>" onfocus="mtShowCaptcha()" /></dd>
-							</dl>
-							<dl id="commentForm-email">
-								<dt><label for="comment-email">Mail Address</label></dt>
-								<dd><input id="comment-email" name="email" size="30" value="<$mt:CommentEmail encode_html="1"$>" onfocus="mtShowCaptcha()" /></dd>
-							</dl>
-							<dl id="commentForm-url">
-								<dt><label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label></dt>
-								<dd><input id="comment-url" name="url" size="30" value="<$mt:CommentURL encode_html="1"$>" onfocus="mtShowCaptcha()" /></dd>
-							</dl>
-						</div>
+                        <div id="comments-open-data">
+                            <dl id="commentForm-name">
+                                <dt><label for="comment-author">Name</label></dt>
+                                <dd><input id="comment-author" name="author" size="30" value="<$mt:CommentAuthor escape="html"$>" onfocus="mtShowCaptcha()" /></dd>
+                            </dl>
+                            <dl id="commentForm-email">
+                                <dt><label for="comment-email">Mail Address</label></dt>
+                                <dd><input id="comment-email" name="email" size="30" value="<$mt:CommentEmail escape="html"$>" onfocus="mtShowCaptcha()" /></dd>
+                            </dl>
+                            <dl id="commentForm-url">
+                                <dt><label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label></dt>
+                                <dd><input id="comment-url" name="url" size="30" value="<$mt:CommentURL escape="html"$>" onfocus="mtShowCaptcha()" /></dd>
+                            </dl>
+                        </div>
 <MTIfCommentParent>
-						<dl id="commentForm-reply">
-							<dt> <label for="comment-reply" id="comment-reply-label"><__trans phrase="Replying to comment from [_1]" params="<MTCommentParent><$mt:CommentAuthor$></MTCommentParent>"></label></dt>
-							<dd><input type="checkbox" id="comment-reply" name="comment_reply" value="<$mt:CommentParentID$>" checked="checked" onclick="mtSetCommentParentID()" /></dd>
-						</dl>
+                        <dl id="commentForm-reply">
+                            <dt> <label for="comment-reply" id="comment-reply-label"><__trans phrase="Replying to comment from [_1]" params="<MTCommentParent><$mt:CommentAuthor$></MTCommentParent>"></label></dt>
+                            <dd><input type="checkbox" id="comment-reply" name="comment_reply" value="<$mt:CommentParentID$>" checked="checked" onclick="mtSetCommentParentID()" /></dd>
+                        </dl>
 </MTIfCommentParent>
-						<dl id="comments-open-text">
-							<dt>
-								<label for="comment-text">
-									<MTIfAllowCommentHTML>
-										<__trans phrase="(You may use HTML tags for style)">
-									</MTIfAllowCommentHTML>
-								</label>
-							</dt>
-							<dd>
-								<textarea id="comment-text" class="inputField" name="text" rows="8" cols="50" onfocus="mtShowCaptcha()"><$mt:CommentBody autolink="0" sanitize="0" convert_breaks="0" encode_html="1"$></textarea>
-							</dd>
-						</dl>
+                        <dl id="comments-open-text">
+                            <dt>
+                                <label for="comment-text">
+                                    <MTIfAllowCommentHTML>
+                                        <__trans phrase="(You may use HTML tags for style)">
+                                    </MTIfAllowCommentHTML>
+                                </label>
+                            </dt>
+                            <dd>
+                                <textarea id="comment-text" class="inputField" name="text" rows="8" cols="50" onfocus="mtShowCaptcha()"><$mt:CommentBody autolink="0" sanitize="0" convert_breaks="0" escape="html"$></textarea>
+                            </dd>
+                        </dl>
 
-						<p id="comments-open-captcha"></p>
+                        <p id="comments-open-captcha"></p>
 
-						<div class="action" id="comments-open-footer">
-							<input type="button" class="submit cancel" name="cancel" id="comment-cancel" value="Cancel" onclick="window.location='<$mt:EntryPermalink$>'" />
-							<input type="submit" class="submit preview" accesskey="v" name="preview_button" id="comment-preview" value="Preview" onclick="this.form.preview.value='1';" />
-							<input type="submit" class="submit post" accesskey="s" name="post" id="comment-submit" value="Submit" />
-						</div>
-						</fieldset>
-					</form>
-				</div>
-				<!-- end div#comments-open-content -->
-			</div>
-			<!-- end div#comments-open -->
+                        <div class="action" id="comments-open-footer">
+                            <input type="button" class="submit cancel" name="cancel" id="comment-cancel" value="Cancel" onclick="window.location='<$mt:EntryPermalink$>'" />
+                            <input type="submit" class="submit preview" accesskey="v" name="preview_button" id="comment-preview" value="Preview" onclick="this.form.preview.value='1';" />
+                            <input type="submit" class="submit post" accesskey="s" name="post" id="comment-submit" value="Submit" />
+                        </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- end div#comments-open-content -->
+            </div>
+            <!-- end div#comments-open -->
 
-			<$MTInclude module="<__trans phrase="Topic Path">"$>
-		</div>
-		<!-- end div#main -->
-		<$MTInclude module="<__trans phrase="Return to page top">"$>
-	</div>
-	<!-- end div#content -->
-	<$MTInclude module="<__trans phrase="Footer">"$>
+            <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Topic Path"></__trans_section>"$>
+        </div>
+        <!-- end div#main -->
+        <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Return to page top"></__trans_section>"$>
+    </div>
+    <!-- end div#content -->
+    <$MTInclude module="<__trans_section component="mtVicunaOrigin"><__trans phrase="Footer"></__trans_section>"$>
 </body>
 </html>

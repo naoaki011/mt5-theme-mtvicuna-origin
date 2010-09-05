@@ -1,22 +1,39 @@
-<p class="topicPath">
-	<a href="<$MTBlogURL$>" rel="nofollow">Home</a>
-	<MTIf name="tempName" ne="index_main">&gt;</MTIf>
-	<MTIf name="tempName" eq="index_archive_datebased"><a href="<$MTLink template="<__trans phrase="Archive Index">"$>">Archives</a> &gt;</MTIf>
-	<MTIf name="tempName" eq="index_archive_category">
-		<MTParentCategories glue=" | " exclude_current="1"><a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel$></a> &gt;</MTParentCategories>
+            <p class="topicPath">
+                <a href="<$MTBlogURL$>" rel="nofollow">Home</a><MTUnless strip_linefeeds="1" trim="1">
+<MTIf name="tempName" ne="index_main">
+                &gt;
+</MTIf>
+<MTIf tag="Link" template="<__trans phrase="archive_index">">
+	<MTIf name="tempName" eq="index_archive_datebased">
+                <a href="<$MTLink template="<__trans phrase="Archive Index">"$>">Archives</a>&nbsp;&gt;&nbsp;
 	</MTIf>
-	<MTIf name="tempName" eq="individual_webpage">
-		<MTParentFolders><$MTFolderLabel$> &gt; </MTParentFolders> 
+</MTIf>
+<MTIf name="tempName" eq="index_archive_category">
+	<MTParentCategories glue=" | " exclude_current="1">
+                <a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel escape="html"$></a>&nbsp;&gt;&nbsp;
+	</MTParentCategories>
+</MTIf>
+<MTIf name="tempName" eq="individual_webpage">
+	<MTParentFolders>
+                <$MTFolderLabel escape="html"$>&nbsp;&gt;&nbsp;
+	</MTParentFolders> 
+</MTIf>
+<MTIf name="tempName" like="entry|system_comment">
+	<MTIf tag="EntryCategory">
+		<MTEntryCategories glue=" | ">
+			<MTHasParentCategory>
+				<MTParentCategories exclude_current="1">
+                <a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel escape="html"$></a>&nbsp;&gt;&nbsp;
+				</MTParentCategories>
+			</MTHasParentCategory>
+                <a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel escape="html"$></a>&nbsp;&gt;&nbsp;
+		</MTEntryCategories>
 	</MTIf>
-	<MTIf name="tempName" like="entry|system_comment">
-		<MTIfNonEmpty tag="MTEntryCategory">
-			<MTEntryCategories glue=" | "><a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel$></a> &gt;</MTEntryCategories>
-		</MTIfNonEmpty>
-		<MTIf name="tempName" like="system_comment">
-			<a href="<MTEntryLink>"><$MTEntryTitle$></a> &gt;
-		</MTIf>
+	<MTIf name="tempName" like="system_comment">
+                <a href="<MTEntryLink>"><$MTEntryTitle escape="html"$></a>&nbsp;&gt;&nbsp;
 	</MTIf>
-	<MTIf name="tempName" ne="index_main">
-		<span class="current"><$MTGetVar name="page_title"$></span>
-	</MTIf>
-</p>
+</MTIf>
+<MTIf name="tempName" ne="index_main">
+                <span class="current"><$MTGetVar name="page_title"$></span>
+</MTIf></MTUnless>
+            </p>

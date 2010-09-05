@@ -1,10 +1,16 @@
-<MTIf tag="BlogPingCount">
-<dt>Recent Trackbacks</dt>
-<dd class="recentTrackbacks">
-	<ul>
-<MTPings lastn="5">
-		<li><em><MTPingEntry><a href="<$MTEntryPermalink$>"><$MTEntryTitle$></a></MTPingEntry></em>:<br /> └ <a href="<$MTPingURL encode_xml="1"$>" rel="nofollow"><MTPingBlogName /></a></li>
+<MTIfWebsite>
+	<MTSetVar name="include_modifier" value="children" />
+<MTElse>
+	<MTSetVar name="include_modifier" value="$blog_id" />
+</MTIfWebsite>
+<MTIf tag="BlogPingCount" include_blogs="$include_modifier">
+                <dt>Recent Trackbacks</dt>
+                <dd class="recentTrackbacks">
+                    <ul>
+<MTPings lastn="5" include_blogs="$include_modifier">
+                        <li><em><MTPingEntry><a href="<$MTEntryPermalink$>"><$MTEntryTitle$></a></MTPingEntry></em>:<br /> └ <a href="<$MTPingURL encode_xml="1"$>" rel="nofollow"><MTPingBlogName /></a></li>
 </MTPings>
-	</ul>
-</dd>
+                    </ul>
+                </dd>
 </MTif>
+                

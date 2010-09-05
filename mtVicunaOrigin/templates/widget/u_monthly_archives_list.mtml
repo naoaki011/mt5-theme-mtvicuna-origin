@@ -1,6 +1,16 @@
-<dt>Archives</dt>
-<dd class="monthlyArchives">
-	<ul>
-	<MTArchiveList archive_type="Monthly" lastn="5"><li><a href="<$MTArchiveLink$>" title="<$MTArchiveCount$>" rel="nofollow"><$MTArchiveDate format="%Y-%m"$></a></li>
-	</MTArchiveList><li><a href="<$MTLink template="<__trans phrase="Archive Index">"$>">All</a></li></ul>
-</dd>
+<MTArchiveList archive_type="Monthly" lastn="5">
+	<MTArchiveListHeader>
+                <dt>Archives</dt>
+                <dd class="monthlyArchives">
+                    <ul>
+	</MTArchiveListHeader>
+                        <li><a href="<$MTArchiveLink$>" title="<$MTArchiveCount$>" rel="nofollow"><$MTArchiveDate format="%Y-%m"$></a></li>
+	<MTArchiveListFooter>
+		<MTIf tag="Link" template="archive_index">
+                        <li><a href="<$MTLink template="archive_index"$>">All</a></li>
+		</MTIf>
+                    </ul>
+                </dd>
+	</MTArchiveListFooter>
+</MTArchiveList>
+                

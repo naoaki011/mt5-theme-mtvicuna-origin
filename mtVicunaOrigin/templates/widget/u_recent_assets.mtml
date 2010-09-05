@@ -1,14 +1,20 @@
-<MTIfNonZero tag="AssetCount">
-<dt>Photos</dt>
-<dd class="recentAssets">
-	<ul class="thumb">
-	<MTAssets type="image">
-		<li>
-			<a href="<$MTAssetURL$>" rel="nofollow">
-					<img src="<$MTAssetThumbnailURL height="70"$>" alt="<$MTAssetLabel$>" />
-			</a>
-		</li>
+<MTIfWebsite>
+	<MTBlogs include_blogs="children" include_with_website="1"><MTIf tag="MTAssetCount"><MTSetVar name="count_asset" value="1"></MTIf></MTBlogs>
+<MTElse>
+	<MTBlogs include_blogs="children"><MTIf tag="MTAssetCount"><MTSetVar name="count_asset" value="1"></MTIf></MTBlogs>
+</MTIfWebsite>
+<MTIf name="count_asset">
+                <dt>Photos</dt>
+                <dd class="recentAssets">
+                    <ul class="thumb">
+	<MTAssets type="image" include_blogs="children" include_with_website="1">
+                        <li>
+                            <a href="<$MTAssetURL$>" rel="nofollow">
+                                <img src="<$MTAssetThumbnailURL height="70"$>" alt="<$MTAssetLabel escape="html"$>" />
+                            </a>
+                        </li>
 	</MTAssets>
-	</ul>
-</dd>
-</MTIfNonZero>
+                    </ul>
+                </dd>
+</MTIf>
+                

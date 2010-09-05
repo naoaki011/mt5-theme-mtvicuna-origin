@@ -1,19 +1,21 @@
 <MTIfPingsAccepted>
-<div class="section" id="trackback">
-	<h2>Trackbacks:<span class="count"><$MTEntryTrackbackCount$></span></h2>
-	<dl class="info">
-		<dt>TrackBack URL for this entry</dt>
-		<dd class="URL"><$MTEntryTrackbackLink$></dd>
-		<dt>Listed below are links to weblogs that reference</dt>
-		<dd><a href="<$MTEntryPermalink$>"><$MTEntryTitle encode_html="1"$></a> from <a href="<$MTBlogURL$>"><$MTBlogName encode_html="1"$></a></dd>
-	</dl>
-	<MTIfNonZero tag="MTEntryTrackbackCount">
-	<dl class="log">
+                <div class="section" id="trackback">
+                    <h2>Trackbacks:<span class="count"><$MTEntryTrackbackCount$></span></h2>
+                    <dl class="info">
+                        <dt>TrackBack URL for this entry</dt>
+                        <dd class="URL"><$MTEntryTrackbackLink$></dd>
+	<MTIf tag="EntryTrackbackCount">
 		<MTPings>
-		<dt id="ping-<$MTPingID$>"><span class="name"><a href="<$MTPingURL$>"><$MTPingTitle$> from <$MTPingBlogName$></a></span> <span class="date"><$MTPingDate format="%Y-%m-%d (%a) %H:%M"$></span></dt>
-		<dd><$MTPingExcerpt$></dd>
+			<MTPingsHeader>
+                        <dt>Listed below are links to weblogs that reference</dt>
+                        <dd><a href="<$MTEntryPermalink$>"><$MTEntryTitle escape="html"$></a> from <a href="<$MTBlogURL$>"><$MTBlogName escape="html"$></a></dd>
+                    </dl>
+                    <dl class="log">
+			</MTPingsHeader>
+                        <dt id="ping-<$MTPingID$>"><span class="name"><a href="<$MTPingURL$>"><$MTPingTitle escape="html"$> from <$MTPingBlogName escape="html"$></a></span> <span class="date"><$MTPingDate format="%Y-%m-%d (%a) %H:%M"$></span></dt>
+                        <dd><$MTPingExcerpt$></dd>
 		</MTPings>
-	</dl>
-	</MTIfNonZero>
-</div><!-- end div#trackback -->
+	</MTIf>
+                    </dl>
+                </div><!-- end div#trackback -->
 </MTIfPingsAccepted>

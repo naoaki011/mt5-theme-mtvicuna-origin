@@ -1,6 +1,20 @@
-<dt>Recent Entries</dt>
-<dd class="recentEntries">
-	<ul>
-	<MTEntries lastn="5"><li><a href="<$MTEntryPermalink$>"><$MTEntryTitle$></a></li></MTEntries>
-	</ul>
-</dd>
+<MTIfWebsite>
+	<MTSetVar name="include_modifier" value="children" />
+<MTElse>
+	<MTSetVar name="include_modifier" value="$blog_id" />
+</MTIfWebsite>
+                <dt>Recent Entries</dt>
+                <dd class="recentEntries">
+<MTEntries lastn="5" include_blogs="$include_modifier">
+	<MTEntriesHeader>
+                    <ul>
+	</MTEntriesHeader>
+                        <li><a href="<$MTEntryPermalink$>"><$MTEntryTitle escape="html"$></a></li>
+	<MTEntriesFooter>
+                    </ul>
+	</MTEntriesFooter>
+<MTElse>
+                    <p>No Entries</p>
+</MTEntries>
+                </dd>
+                

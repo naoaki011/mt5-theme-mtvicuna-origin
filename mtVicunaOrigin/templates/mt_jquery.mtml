@@ -1,0 +1,217 @@
+//
+// This file defines blog variables and phrases which are used by javascript functions.
+//
+var mt;
+mt = {
+    cookie: {
+        name: "<$mt:UserSessionCookieName$>",
+        domain: "<$mt:UserSessionCookieDomain$>",
+        path: "<$mt:UserSessionCookiePath$>",
+        timeout: <$mt:UserSessionCookieTimeout$>
+    },
+    links: {
+        signIn: '<$mt:SignInLink$>',
+        signOut: '<$mt:SignOutLink$>'
+    },
+    blog: {
+        id: <$mt:BlogID _default="0"$>,
+        url: '<$mt:BlogURL encode_url="1"$>',
+        staticWebPath: '<$mt:StaticWebPath$>',
+        adminScript: '<$mt:AdminScript$>',
+        signInLink: '<$mt:SignInLink$>',
+        signOutLink: '<$mt:SignOutLink$>',
+        comments: {
+            script: '<$mt:CGIPath$><$mt:CommentScript$>',
+            armor: '<$mt:BlogSitePath encode_sha1="1"$>',
+            accepted: <mt:IfCommentsAccepted>1<mt:Else>0</mt:IfCommentsAccepted>,
+            captchaFields: '<$mt:CaptchaFields$>'
+        },
+        community: {
+            script: '<$mt:CGIPath$><$mt:CommunityScript$>',
+            ifAnonymousRecommendAllowed: <mt:IfAnonymousRecommendAllowed>1<mt:Else>0</mt:IfAnonymousRecommendAllowed>
+        },
+        pings: {
+            accepted: <mt:IfPingsAccepted>1<mt:Else>0</mt:IfPingsAccepted>
+        },
+        registration: {
+            required: <mt:IfRegistrationRequired>1<mt:Else>0</mt:IfRegistrationRequired>,
+            allowed: <mt:IfRegistrationAllowed>1<mt:Else>0</mt:IfRegistrationAllowed>
+        }
+    }
+};
+
+function jqueryGreet() {
+    $('#comment-greeting').greet({
+        mode: 'mtpro',
+        editProfileText: 'プロフィール編集',
+        logoutText: 'サインアウト',
+        loginText: 'サインイン',
+        registerText: '登録する',
+        loggedInMessage: 'こんにちは %u さん (%p | %o)',
+        loggedOutMessage: '%i または %r'
+    });
+    if ($('#commentsForm')) {
+        $("#commentsForm").onauthchange(function(evt, user) {
+            var openDataDiv = $("#comments-open-data");
+            if (openDataDiv) {
+                if (user && user.is_authenticated) {
+                    if (user.is_banned) {
+                        $("<p>このブログにコメントする権限を持っていません。(\<a class=\"logout\" href=\""+mt.links.signOut+"\">サインアウト\</a>して別アカウントでサインインし直す)</p>").insertBefore(this);
+                        $('#commentsForm').hide();
+                    } else {
+                        $('#commentsForm').show();
+                        $("fieldset#signin_menu").hide();
+                        $("<p><img src='"+user.userpic+"' width='40' height='40' alt='" + user.name + "' />" + user.name + "さん、サインインありがとうございます。</p>").insertBefore(this);
+                        $("#comment-author", openDataDiv).val(user.name);
+                        $("#comment-email", openDataDiv).val(user.email);
+                        $("#comment-url", openDataDiv).val(user.url);
+                        $(openDataDiv).fadeOut(1000);
+                    }
+                    $("a.signin").hide();
+                } else {
+                    if (mt.blog.registration.required) {
+                        $("<p>コメントするにはまずサインインすることが必要です。</p>").insertBefore(this);
+                        $('#commentsForm').hide();
+                    } else {
+                        $("<p>コメントする前にサインインすることが可能です。</p>").insertBefore(this);
+                        $('#commentsForm').show();
+                    }
+                }
+            }
+        });
+    };
+}
+
+function jqueryCommentForm() {
+    if ($('#commentsForm')) {
+        var leaveCommentMsg = 'Leave a comment...';
+        var spinner_selector = '.spinner, .spinner-status';
+        // prepare Options Object
+        var options = {
+            url:        '<$mt:CGIPath escape="js"$><$mt:CommentScript escape="js"$>',
+            beforeSubmit: function(formData, jqForm, options) { 
+                // alert('Now commenting...');
+                form.find(spinner_selector).fadeIn('fast').css('height',form.height());
+                $("<p class=\"response\"></p>").insertBefore("#commentsForm").hide();
+                // The array of form data takes the following form: 
+                // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ] 
+                // return false to cancel submit                  
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Our sincerest apologies, but an error occurred while processing the comment response: " + textStatus);
+                form.find(spinner_selector).fadeOut();
+            },
+            success: function(responseText,statusText) {
+                form.find(spinner_selector).fadeOut();
+                var comment_html; var comment_id; var comment;
+                comment_html = responseText;
+
+                if (responseText.match(/\<title\>Error\<\/title\>/)) {
+                    var resp_message = $(comment_html).find("div.textBody").html();
+                    $("p.response").addClass("error").show().html(resp_message);
+                    $("p.response p:last-child").remove();
+                    return false;
+                } else {
+                    if (responseText.match(/\<title\>Pending\<\/title\>/)) {
+//                        var resp_message = $(comment_html).find("div.textBody").html();
+                    }
+                }
+                var resp_message = $(comment_html).find("div.textBody").html();
+                $("p.response").show().css({"background-color":"#ffff88"}).html(resp_message);
+                $("p.response p:last-child").remove();
+//                $("p.response").animate({"background-color":"#ffffff"},{duration:1000,easing:"swing"});
+                comment      = $(comment_html).hide();
+                comment_id   = comment.attr('id').substr(8);
+            }
+        };
+        // pass options to ajaxForm 
+        var form = $('#commentsForm').ajaxForm(options);
+        // 
+        form.find('[name=ajax]').val('1');
+        form.find('[name=armor]').val(mt.blog.comments.armor);
+        form.find('textarea').unbind('focus').val(leaveCommentMsg).focus( function() { 
+            if($(this).val() == leaveCommentMsg) { $(this).val(''); } 
+        });
+        form.append('<div class="spinner"></div><div class="spinner-status"></div>');
+        jqueryCommentPreview() ;
+        return false;
+    };
+}
+
+function jqueryCommentPreview() {
+    newDOM = $("<div id=\"commentPreview\" class=\"comment\"><a name=\"commentPreview\"/>    <div class=\"inner\">    <div class=\"comment-header\">        <div class=\"asset-meta\">        <span class=\"byline\">            <span class=\"vcard author\"><a id=\"authorLink\" title=\"\" href=\"\" rel=\"nofollow\"></a></span>            | <a id=\"commentPreviewLink\" href=\"\"><abbr class=\"published\" title=\"\"></abbr></a>            | <a title=\"Reply\" href=\"#\">Reply</a>        </span>        </div>    </div>    <div class=\"comment-content\">    </div>    </div></div>");
+    $(document).ready(function() {
+        $("#comment-text").keyup(function(evt) {
+            newContent = $(this).val();
+            while ( (i = newContent.indexOf("\n")) != -1)
+              newContent = newContent.replace("\n", "<br/>");
+            newDOM.find("div.comment-content").html("<p>" + newContent + "</p>");
+        });
+        if (user == undefined) {
+            nameChange = function() {
+                newDOM.find("#authorLink").text($(this).val());
+            };
+            urlChange = function() {
+                newDOM.find("#authorLink").attr("href", $(this).val() );
+            };
+            $("#comment-author").keyup(nameChange).blur(nameChange);
+            $("#comment-url").keyup(urlChange).blur(urlChange);
+        } else {
+            newDOM.find("#authorLink").text(user.name).attr("href", user.url);
+        }
+        fieldset = $("<fieldset/>").css("border", "1px solid black").css("padding", "5px").appendTo($("#commentsForm"));
+        newDOM.appendTo(fieldset);
+    });
+}
+
+function signInSubmitHandler(e) {
+    var f = $(this);
+    var id = f.attr('id');
+    $(this).append('<div class="spinner"></div><div class="spinner-status"></div>');
+    var spinner_selector = '#'+id+' .spinner, #'+id+' .spinner-status';
+    $(this).ajaxSubmit({
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+        iframe: false,
+        type: 'post',
+        dataType: 'json',
+        clearForm: true,
+        beforeSubmit: function(formData, jqForm, options) {
+            $(spinner_selector).fadeIn('fast').css('height',f.height());
+        },
+        success: function(data) {
+            if (data.status == 1) {
+                var u = $.fn.movabletype.fetchUser();
+                f.fadeOut('fast',function() { f.parent().find('form.logged-in').fadeIn('fast'); });
+            } else {
+                alert("login failure");
+                $(spinner_selector).fadeOut('fast');
+                f.find('p.error').html(data.message).fadeIn('fast');
+            }
+        }
+    });
+    return false;
+};
+
+$(document).ready(function() {
+    $(".signin").click(function(e) {          
+        e.preventDefault();
+/*        var u = $.fn.movabletype.fetchUser();
+        if (u && u.is_authenticated) {
+            mtSetUser(u);
+        } else {*/
+            $("fieldset#signin_menu").toggle();
+            $(".signin").toggleClass("menu-open");
+/*        }*/
+    });
+    $("fieldset#signin_menu").mouseup(function() {
+        return false
+    });
+    $(document).mouseup(function(e) {
+        if($(e.target).parent("a.signin").length==0) {
+            $(".signin").removeClass("menu-open");
+            $("fieldset#signin_menu").hide();
+        }
+    });
+
+    $('form.logged-out').submit( signInSubmitHandler );
+});
