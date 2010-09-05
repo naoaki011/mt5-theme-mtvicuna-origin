@@ -1,0 +1,48 @@
+<MTSetVar name="tempName" value="individual_webpage">
+<MTSetVarBlock name="page_title"><$MTPageTitle remove_html="1"$></MTSetVarBlock>
+<MTSetVarBlock name="current_page"><$MTPageID$></MTSetVarBlock>
+<?xml version="1.0" encoding="<$MTPublishCharset$>" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<$MTDefaultLanguage$>" xml:lang="<$MTDefaultLanguage$>">
+<head profile="http://purl.org/net/ns/metaprof">
+	<MTInclude module="<__trans phrase="HTML Header">">
+	<MTIfPingsAccepted><$MTEntryTrackbackData$></MTIfPingsAccepted>
+	<meta name="description" content="<$MTPageExcerpt remove_html="1" ltrim="1"$>" />
+	<MTIfNonEmpty tag="MTPageKeywords"><meta name="keywords" content="<$MTPageKeywords remove_html="1"$>" /></MTIfNonEmpty>
+	<title><$MTGetVar name="page_title"$> - <MTBlogName encode_html="1"$></title>
+</head>
+<body class="webPage single">
+	<$MTInclude module="<__trans phrase="Header">"$>
+	<div id="content">
+		<div id="main">
+			<$MTInclude module="<__trans phrase="Topic Path">"$>
+			<h1><$MTGetVar name="page_title"$></h1>
+			<div class="entry">
+				<ul class="info">
+					<li class="date">Last Modified: <$MTPageModifiedDate format="%x %X"$></li>
+				</ul>
+				<MTIfNonEmpty tag="PageBody">
+				<div class="textBody">
+					<$MTPageBody$>
+				</div>
+				</MTIfNonEmpty>
+
+				<MTIfNonEmpty tag="PageMore">
+				<div class="textBody" id="extended">
+					<$MTPageMore$>
+				</div>
+				</MTIfNonEmpty>
+				<$MTInclude module="<__trans phrase="Comments">"$>
+				<$MTInclude module="<__trans phrase="TrackBacks">"$>
+			</div>
+			<!-- end div.entry -->
+			<$MTInclude module="<__trans phrase="Topic Path">"$>
+		</div>
+		<!-- end div#main -->
+		<$MTInclude module="<__trans phrase="Utilities">"$>
+		<$MTInclude module="<__trans phrase="Return to page top">"$>
+	</div>
+	<!-- end div#content -->
+	<$MTInclude module="<__trans phrase="Footer">"$>
+</body>
+</html>

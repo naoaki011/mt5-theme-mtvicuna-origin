@@ -1,0 +1,11 @@
+<div class="section entry" id="entry<$MTEntryID pad="1"$>">
+	<h2><a href="<$MTEntryPermalink$>"><$MTEntryTitle encode_html="1"$></a></h2>
+	<$MTInclude module="<__trans phrase="Entry Metadata">"$>
+	<div class="textBody">
+		<$MTEntryBody>
+		<MTIfNonEmpty tag="EntryMore">
+			<p class="continue"><a href="<$MTEntryPermalink$>#extended" title="<__trans phrase="Extended"> - <$MTEntryTitle encode_html="1"$>" rel="nofollow">Continue reading</a></p>
+		</MTIfNonEmpty>
+	</div>
+	<$MTInclude module="<__trans phrase="Entry Summary Feedbacks">"$>
+</div>

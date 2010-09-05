@@ -1,0 +1,32 @@
+<MTSetVar name="tempName" value="individual_entry">
+<MTSetVarBlock name="page_title"><$MTEntryTitle remove_html="1"$></MTSetVarBlock>
+<?xml version="1.0" encoding="<$MTPublishCharset$>" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<$MTDefaultLanguage$>" xml:lang="<$MTDefaultLanguage$>">
+<head profile="http://purl.org/net/ns/metaprof">
+	<MTInclude module="<__trans phrase="HTML Header">">
+	<MTEntryPrevious><link rel="prev" href="<$MTEntryPermalink$>" title="<$MTEntryTitle encode_html="1"$>" /></MTEntryPrevious>
+	<MTEntryNext><link rel="next" href="<$MTEntryPermalink$>" title="<$MTEntryTitle encode_html="1"$>" /></MTEntryNext>
+	<meta name="description" content="<$MTEntryExcerpt remove_html="1" ltrim="1"$>" />
+	<MTIfNonEmpty tag="MTEntryKeywords"><meta name="keywords" content="<$MTEntryKeywords remove_html="1"$>" /></MTIfNonEmpty>
+	<MTIfPingsAccepted><$MTEntryTrackbackData$></MTIfPingsAccepted>
+	<title><$MTGetVar name="page_title"$> - <MTBlogName encode_html="1"$></title>
+</head>
+<body class="individual single" id="entry<$MTEntryID pad="1"$>">
+	<$MTInclude module="<__trans phrase="Header">"$>
+	<div id="content">
+		<div id="main">
+			<$MTInclude module="<__trans phrase="Topic Path">"$>
+			<$MTInclude module="<__trans phrase="Next Entry Link Simple">"$>
+			<h1><$MTGetVar name="page_title"$></h1>
+			<$MTInclude module="<__trans phrase="Entry Detail">"$>
+			<$MTInclude module="<__trans phrase="Topic Path">"$>
+		</div>
+		<!-- end div#main -->
+		<$MTInclude module="<__trans phrase="Utilities">"$>
+		<$MTInclude module="<__trans phrase="Return to page top">"$>
+	</div>
+	<!-- end div#content -->
+	<$MTInclude module="<__trans phrase="Footer">"$>
+</body>
+</html>

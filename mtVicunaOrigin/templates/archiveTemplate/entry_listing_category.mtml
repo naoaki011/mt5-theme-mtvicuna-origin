@@ -1,0 +1,35 @@
+<MTSetVar name="tempName" value="index_archive_category">
+<MTSetVarBlock name="page_title"><$MTArchiveTitle$> Archive</MTSetVarBlock>
+<?xml version="1.0" encoding="<$MTPublishCharset$>" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<$MTDefaultLanguage$>" xml:lang="<$MTDefaultLanguage$>">
+<head profile="http://purl.org/net/ns/metaprof">
+	<MTInclude module="<__trans phrase="HTML Header">">
+	<MTIfNonEmpty tag="MTCategoryDescription"><meta name="description" content="<$MTCategoryDescription remove_html="1"$>" /></MTIfNonEmpty>
+	<MTIf name="datebased_archive">
+	    <MTArchivePrevious><link rel="prev" href="<$mt:ArchiveLink$>" title="<$MTArchiveTitle$>" /></MTArchivePrevious>
+	    <MTArchiveNext><link rel="next" href="<$MTArchiveLink$>" title="<$MTArchiveTitle$>" /></MTArchiveNext>
+	</MTIf>
+	<title><$MTGetVar name="page_title"$> - <MTBlogName encode_html="1"$></title>
+</head>
+<body class="category double">
+	<$MTInclude module="<__trans phrase="Header">"$>
+	<div id="content">
+		<div id="main">
+			<$MTInclude module="<__trans phrase="Topic Path">"$>
+			<h1><$MTGetVar name="page_title"$></h1>
+			<MTEntries>
+				<$MTEntryTrackbackData$>
+				<$MTInclude module="<__trans phrase="Entry Summary">"$>
+			</MTEntries>
+			<$MTInclude module="<__trans phrase="Archive Index Link">"$>
+			<$MTInclude module="<__trans phrase="Topic Path">"$>
+		</div>
+		<!-- end div#main -->
+		<$MTInclude module="<__trans phrase="Utilities">"$>
+		<$MTInclude module="<__trans phrase="Return to page top">"$>
+	</div>
+	<!-- end div#content -->
+	<$MTInclude module="<__trans phrase="Footer">"$>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<MTIgnore>
+	<__trans phrase='This is a custom set of widgets that are conditioned to only appear on the homepage (or "main_index"). More info: [_1]' params='http://www.movabletype.org/documentation/designer/widget-sets.html'>
+</MTIgnore>
+<MTIf name="tempName" eq="index_main">
+	<$MTInclude widget="<__trans phrase="Calender">"$>
+	<$MTInclude widget="<__trans phrase="Recent Comments">"$>
+	<$MTInclude widget="<__trans phrase="Recent Trackbacks">"$>
+	<$MTInclude widget="<__trans phrase="Recent Assets">"$>
+	<$MTInclude widget="<__trans phrase="Tag Cloud">"$>
+</MTIf>

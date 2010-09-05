@@ -1,0 +1,85 @@
+<MTVar name="calender_title_format" value="%Y %b">
+<MTIf name="tempName" eq="index_main">
+	<MTArchiveList archive_type="Monthly" lastn="1">
+		<MTSetVarBlock name="calender_title"><$MTArchiveDate format="$calender_title_format"$></MTSetVarBlock>
+		<dt>Calendar</dt>
+		<dd class="calendar">
+			<table class="calendar" cellpadding="0" cellspacing="0" summary="Monthly calendar">
+				<caption>
+					<MTArchiveNext archive_type="Monthly"><a href="<$MTArchiveLink archive_type="Monthly"$>" title="Newer" rel="nofollow">&laquo;</a></MTArchiveNext>
+					<$MTVar name="calender_title"$>
+					<MTArchivePrevious archive_type="Monthly"><a href="<$MTArchiveLink archive_type="Monthly"$>" title="Older" rel="nofollow">&raquo;</a></MTArchivePrevious>
+				</caption>
+				<tr>
+					<th class="sun" title="Sunday">S</th>
+					<th title="Monday">M</th>
+					<th title="Tuesday">T</th>
+					<th title="Wednesday">W</th>
+					<th title="Thursday">T</th>
+					<th title="Friday">F</th>
+					<th class="sat" title="Saturday">S</th>
+				</tr>
+				<MTCalendar month="this">
+					<MTCalendarWeekHeader><tr></MTCalendarWeekHeader>
+					<td<MTCalendarIfToday> class="today"</MTCalendarIfToday>><MTCalendarIfEntries><MTEntries sort_order="ascend"><MTDateHeader><a href="<$MTEntryLink archive_type="Individual"$>" rel="nofollow"><$MTCalendarDay$></a><MTElse><a href="<$MTEntryLink archive_type="Individual"$>" rel="nofollow">*</a></MTElse></MTDateHeader></MTEntries></MTCalendarIfEntries><MTCalendarIfNoEntries><$MTCalendarDay$></MTCalendarIfNoEntries><MTCalendarIfBlank>&nbsp;</MTCalendarIfBlank></td>
+					<MTCalendarWeekFooter></tr></MTCalendarWeekFooter>
+				</MTCalendar>
+			</table>
+		</dd>
+	</MTArchiveList>
+<MTElse name="archive_class" like="monthly|daily|weekly">
+	<MTSetVarBlock name="calender_title"><$MTArchiveDate format="$calender_title_format"$></MTSetVarBlock>
+	<dt>Calendar</dt>
+	<dd>
+		<table class="calendar" cellpadding="0" cellspacing="0" summary="Monthly calendar">
+			<caption>
+				<MTArchiveNext archive_type="Monthly"><a href="<$MTArchiveLink archive_type="Monthly"$>" title="Newer" rel="nofollow">&laquo;</a></MTArchiveNext>
+				<$MTVar name="calender_title"$>
+				<MTArchivePrevious archive_type="Monthly"><a href="<$MTArchiveLink archive_type="Monthly"$>" title="Older" rel="nofollow">&raquo;</a></MTArchivePrevious>
+			</caption>
+			<tr>
+				<th class="sun" title="Sunday">S</th>
+				<th title="Monday">M</th>
+				<th title="Tuesday">T</th>
+				<th title="Wednesday">W</th>
+				<th title="Thursday">T</th>
+				<th title="Friday">F</th>
+				<th class="sat" title="Saturday">S</th>
+			</tr>
+			<MTCalendar month="this">
+				<MTCalendarWeekHeader><tr></MTCalendarWeekHeader>
+				<td<MTCalendarIfToday> class="today"</MTCalendarIfToday>><MTCalendarIfEntries><MTEntries sort_order="ascend"><MTDateHeader><a href="<$MTEntryLink archive_type="Individual"$>" rel="nofollow"><$MTCalendarDay$></a><MTElse><a href="<$MTEntryLink archive_type="Individual"$>" rel="nofollow">*</a></MTElse></MTDateHeader></MTEntries></MTCalendarIfEntries><MTCalendarIfNoEntries><$MTCalendarDay$></MTCalendarIfNoEntries><MTCalendarIfBlank>&nbsp;</MTCalendarIfBlank></td>
+				<MTCalendarWeekFooter></tr></MTCalendarWeekFooter>
+			</MTCalendar>
+		</table>
+	</dd>
+<MTElse name="archive_class" eq="entry-archive">
+	<MTSetVarBlock name="entry_id"><$MTEntryID$></MTSetVarBlock>
+	<MTEntries id="$entry_id">
+		<MTSetVarBlock name="calender_title"><$MTEntryDate format="$calender_title_format"$></MTSetVarBlock>
+		<dt>Calendar</dt>
+		<dd>
+			<table class="calendar" cellpadding="0" cellspacing="0" summary="Monthly calendar">
+				<caption>
+					<MTArchiveNext archive_type="Monthly"><a href="<$MTArchiveLink archive_type="Monthly"$>" title="Newer" rel="nofollow">&laquo;</a></MTArchiveNext>
+					<$MTVar name="calender_title"$>
+					<MTArchivePrevious archive_type="Monthly"><a href="<$MTArchiveLink archive_type="Monthly"$>" title="Older" rel="nofollow">&raquo;</a></MTArchivePrevious>
+				</caption>
+				<tr>
+					<th class="sun" title="Sunday">S</th>
+					<th title="Monday">M</th>
+					<th title="Tuesday">T</th>
+					<th title="Wednesday">W</th>
+					<th title="Thursday">T</th>
+					<th title="Friday">F</th>
+					<th class="sat" title="Saturday">S</th>
+				</tr>
+				<MTCalendar month="this">
+					<MTCalendarWeekHeader><tr></MTCalendarWeekHeader>
+					<td<MTCalendarIfToday> class="today"</MTCalendarIfToday>><MTCalendarIfEntries><MTEntries sort_order="ascend"><MTDateHeader><a href="<$MTEntryLink archive_type="Individual"$>" rel="nofollow"><$MTCalendarDay$></a><MTElse><a href="<$MTEntryLink archive_type="Individual"$>" rel="nofollow">*</a></MTElse></MTDateHeader></MTEntries></MTCalendarIfEntries><MTCalendarIfNoEntries><$MTCalendarDay$></MTCalendarIfNoEntries><MTCalendarIfBlank>&nbsp;</MTCalendarIfBlank></td>
+					<MTCalendarWeekFooter></tr></MTCalendarWeekFooter>
+				</MTCalendar>
+			</table>
+		</dd>
+	</MTEntries>
+</MTIf>
